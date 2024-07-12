@@ -1,4 +1,5 @@
 // Day 3: Perfectly spherical houses in a vacuum
+// this keeps track of how many times each house is visited
 package main
 
 import (
@@ -8,6 +9,9 @@ import (
 	"os"
 )
 
+//for part 2 : 
+//santa starts first with the delivering but takes turns with robo santa
+//so santa moves and then robo santa moves and so on and so forth 
 type point struct {
 	x            int
 	y            int
@@ -40,10 +44,11 @@ func main() {
 		line := scanner.Text()
 		for _, char := range line {
 
-      position := currentPosition(coordinates)
+			position := currentPosition(coordinates)
 			recentVisit := coordinates[position]
 			x := recentVisit.x
 			y := recentVisit.y
+      recentVisit.isCurrentPos = false
 
 			coordinates[position].isCurrentPos = false
 
@@ -72,26 +77,9 @@ func main() {
 	}
 
 	fmt.Println(len(coordinates))
-	// fmt.Println(coordinates)
-	// count := 0
-	// for _, point := range coordinates{
-	//   if point.timesVisited > 1{
-	//     count += 1
-	//   }
-	// }
-	// fmt.Println(count)
-	// check how many
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
-	// var coordinates []point
-	// coordinates = append(coordinates, point{0, 0, 1, true})
-	// coordinates = append(coordinates, point{0, 1, 1, false})
-	// coordinates = append(coordinates, point{0, 2, 1, false})
-	//  fmt.Println(coordinates)
-	//  fmt.Println(currentPosition(coordinates))
-	//  coordinates[currentPosition(coordinates)].isCurrentPos = false
-	//  fmt.Println(coordinates)
 }
 
 func coordinateExists(coordinates []point, x int, y int) coordinateExistsReturn {
