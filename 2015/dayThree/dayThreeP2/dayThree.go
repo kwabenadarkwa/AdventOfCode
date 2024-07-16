@@ -28,6 +28,7 @@ type coordinateExistsReturn struct {
 func main() {
 	var coordinates []point
 	var roboCoordinates []point
+
 	file, err := os.Open("input.txt")
 	if err != nil {
 		log.Fatal(err)
@@ -50,7 +51,6 @@ func main() {
 			position := 0
 			var recentVisit point
 			if index%2 == 0 {
-				// fmt.Println(1)
 				position = currentPosition(coordinates)
 				recentVisit = coordinates[position]
 				coordinates[position].isCurrentPos = false
@@ -94,10 +94,9 @@ func main() {
 					roboCoordinates[cLocation].isCurrentPos = true
 				}
 			} else {
-
 				if index%2 == 0 {
 					coordinates = append(coordinates, point{x, y, 1, true})
-				}else{
+				} else {
 					roboCoordinates = append(roboCoordinates, point{x, y, 1, true})
 				}
 			}
@@ -108,7 +107,6 @@ func main() {
 	fmt.Println(roboCoordinates)
 	fmt.Println(coordinates)
 	fmt.Println(len(coordinates) + countIfNotInCoordinates(coordinates, roboCoordinates))
-	// fmt.Println(len(roboCoordinates))
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)

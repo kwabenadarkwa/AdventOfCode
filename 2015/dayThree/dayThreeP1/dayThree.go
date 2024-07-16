@@ -48,7 +48,6 @@ func main() {
 			recentVisit := coordinates[position]
 			x := recentVisit.x
 			y := recentVisit.y
-      recentVisit.isCurrentPos = false
 
 			coordinates[position].isCurrentPos = false
 
