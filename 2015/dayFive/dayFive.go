@@ -25,20 +25,13 @@ func main() {
 
 	for scanner.Scan() {
 		word = scanner.Text()
-		// _ = word
 
 		if containsPairOfTwoLetters(word) && letterInBetween(word) {
 			niceStrings++
 		}
 	}
-	// fmt.Println(letterInBetween("xyxy"))
 
 	fmt.Println(niceStrings)
-	// if containsPairOfTwoLetters("ieodomkazucvgmuy") && letterInBetween("ieodomkazucvgmuy") {
-	//    fmt.Println("yes")
-	// }else{
-	//    fmt.Println("no")
-	//  }
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
@@ -101,17 +94,19 @@ func containsAlphabets(word string) bool {
 	return false
 }
 
-// it contains a pair of any two letters that appears at least twice in the string without
-// overlapping, like xyxy (xy) or aabcdefgaa (aa), but not like aaa (aa, but it overlaps).
 func containsPairOfTwoLetters(word string) bool {
-	var pairs [8]string
-	for l := 0; l < len(word)/2; l++ {
-		pairs[l] = string(word[2*l]) + string(word[2*l+1])
+	var pairs []string
+
+	for index := range word {
+		if index <= len(word)-2 {
+			pairs = append(pairs, string(word[index])+string(word[index+1]))
+		}
 	}
 
 	for index, pair := range pairs {
 		for compIndex, comPair := range pairs {
-			if index != compIndex && pair == comPair {
+			if index != compIndex && index+1 != compIndex && index-1 != compIndex &&
+				pair == comPair {
 				return true
 			}
 		}
@@ -123,7 +118,6 @@ func letterInBetween(word string) bool {
 	lenWord := len(word)
 	for index := range word {
 		if index < lenWord-2 && word[index] == word[index+2] {
-      // fmt.Println(word[index],word[index+2])
 			return true
 		}
 	}
